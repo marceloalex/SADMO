@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - sadmo</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/sidebar/style.css" />
+    <link rel="stylesheet" href="~/css/sidebar/jquery.mCustomScrollbar.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <!-- Font Awesome JS -->
+    <script src="~/js/sidebar/solid.js"></script>
+    <script src="~/js/sidebar/fontawesome.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <!--sidebar-->
+        <nav id="sidebar">
+            <div id="dismiss">
+                <i class="fas fa-arrow-left"></i>
+            </div>
+
+            <div class="sidebar-header" style="text-align:center">
+                <img src="~/img/cubo.png" alt="logo" style="width:80px;height:100px" />
+            </div>
+
+            <ul class="list-unstyled components">
+                <p>SADMO</p>
+                <li class="active">
+                    <a asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                </li>
+                <li>
+                    <a href="#sm_solte" data-toggle="collapse" aria-expanded="false">Solicitud de Tiempo de Entrega</a>
+                    <ul class="collapse list-unstyled" id="sm_solte">
+                        <li>
+                            <a href="#">Buscar Documento de Venta</a>
+                        </li>
+                        <li>
+                            <a href="#">Buscar Sol. de Tiempo de Entrega</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#sm_list" data-toggle="collapse" aria-expanded="false">Listados</a>
+                    <ul class="collapse list-unstyled" id="sm_list">
+                        <li>
+                            <a href="#">Listado de Tiempo de Entrega</a>
+                            <a href="#">Listado de Recojo de Mercadería</a>
+                            <a href="#">Listado de Envío y Disponibilidad de Transporte</a>
+                            <a href="#">Listado de Rutas de Despacho</a>
+                            <a href="#">Listado de Orden de Pedido</a>
+                            <a href="#">Listado de Orden de Pedido - Cliente</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#sm_orpe" data-toggle="collapse" aria-expanded="false">Orden de Pedido</a>
+                    <ul class="collapse list-unstyled" id="sm_orpe">
+                        <li>
+                            <a href="#">Buscar Orden de Pedido</a>
+                            <a href="#">Detalle de Tipo de Corte</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#sm_prod" data-toggle="collapse" aria-expanded="false">Producto</a>
+                    <ul class="collapse list-unstyled" id="sm_prod">
+                        <li>
+                            <a href="#">Buscar Producto</a>
+                            <a href="#">Stock</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#sm_mon" data-toggle="collapse" aria-expanded="false">Monitorización</a>
+                    <ul class="collapse list-unstyled" id="sm_mon">
+                        <li>
+                            <a href="#">Producto</a>
+                            <a href="#">Transporte</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Sadmo</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <partial name="_LoginPartial" />
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </nav>
+
+            <div class="container">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+
+            <footer class="border-top footer text-muted">
+                <div class="container" style="text-align:center">
+                    <a asp-area="" asp-controller="Home" asp-action="Index">&copy; Sistema de Administración de Despacho y Monitoreo - Sadmo 2020</a>
+                </div>
+            </footer>
+
+        </div>
+
+    </div>
+
+    <div class="overlay"></div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/sidebar/popper.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/sidebar/jquery.mCustomScrollbar.concat.min.js"></script>
+    @RenderSection("Scripts", required: false)
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('#dismiss, .overlay').on('click', function () {
+                $('#sidebar').removeClass('active');
+                $('.overlay').removeClass('active');
+            });
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').addClass('active');
+                $('.overlay').addClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+        });
+    </script>
+
+</body>
+</html>
